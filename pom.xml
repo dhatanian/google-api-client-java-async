@@ -28,9 +28,32 @@
             <version>1.19.1</version>
         </dependency>
         <dependency>
+            <groupId>com.google.oauth-client</groupId>
+            <artifactId>google-oauth-client</artifactId>
+            <version>1.18.0-rc</version>
+        </dependency>
+        <dependency>
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpasyncclient</artifactId>
             <version>4.0.2</version>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.11</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.bigtesting</groupId>
+            <artifactId>fixd</artifactId>
+            <version>1.0.2</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.google.apis</groupId>
+            <artifactId>google-api-services-admin-directory</artifactId>
+            <version>v1-rev4-1.15.0-rc</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 
@@ -41,13 +64,21 @@
                 <artifactId>site-maven-plugin</artifactId>
                 <version>0.11</version>
                 <configuration>
-                    <message>Maven artifacts for ${project.version}</message>  <!-- git commit message -->
-                    <noJekyll>true</noJekyll>                                  <!-- disable webpage processing -->
-                    <outputDirectory>${project.build.directory}/mvn-repo</outputDirectory> <!-- matches distribution management repository url above -->
-                    <branch>refs/heads/mvn-repo</branch>                       <!-- remote branch name -->
-                    <includes><include>**/*</include></includes>
-                    <repositoryName>google-api-client-java-async</repositoryName>      <!-- github repo name -->
-                    <repositoryOwner>dhatanian</repositoryOwner>    <!-- github username  -->
+                    <message>Maven artifacts for ${project.version}</message>
+                    <!-- git commit message -->
+                    <noJekyll>true</noJekyll>
+                    <!-- disable webpage processing -->
+                    <outputDirectory>${project.build.directory}/mvn-repo</outputDirectory>
+                    <!-- matches distribution management repository url above -->
+                    <branch>refs/heads/mvn-repo</branch>
+                    <!-- remote branch name -->
+                    <includes>
+                        <include>**/*</include>
+                    </includes>
+                    <repositoryName>google-api-client-java-async</repositoryName>
+                    <!-- github repo name -->
+                    <repositoryOwner>dhatanian</repositoryOwner>
+                    <!-- github username  -->
                 </configuration>
                 <executions>
                     <!-- run site-maven-plugin's 'site' target as part of the build's normal 'deploy' phase -->
