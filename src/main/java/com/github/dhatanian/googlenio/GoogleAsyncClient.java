@@ -128,18 +128,18 @@ public class GoogleAsyncClient {
                 callback.failed(new HttpResponseException(googleHttpResponse));
             }
 
-            try (InputStream input = contentFromEncodingInputStream(result.getEntity().getContent(), result.getEntity().getContentType())) {
+            try (InputStream input = contentFromEncodingInputStream(result.getEntity().getContent(), result.getEntity().getContentEncoding())) {
                 callback.completed(request.getParser().parseAndClose(input, ContentType.getOrDefault(result.getEntity()).getCharset(), responseClass));
             } catch (IOException e) {
                 throw new RuntimeException("Unable to process response", e);
             }
         }
 
-        private InputStream contentFromEncodingInputStream(InputStream content, Header contentType) throws IOException {
-            if (contentType == null || contentType.getValue() == null) {
+        private InputStream contentFromEncodingInputStream(InputStream content, Header contentEncoding) throws IOException {
+            if (contentEncoding == null || contentEncoding.getValue() == null) {
                 return content;
             }
-            switch (contentType.getValue().toLowerCase()) {
+            switch (contentEncoding.getValue().toLowerCase()) {
                 case "gzip":
                     return new GZIPInputStream(content);
                 case "deflate":
